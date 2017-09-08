@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>Simple Chat App - VueJS and Web Sockets</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+    <style>
+        .container {margin-top: 40px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-xs-offset-3 col-xs-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Join to conversation!</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="messages" class="form-control-label">Messages</label>
+                        <textarea id="messages" class="form-control" readonly rows="4"></textarea>
+                    </div>
+                    <div class="form-inline pull-right">
+                        <div class="form-group form-group-sm">
+                            <label for="message_text" class="form-control-label">Write your message:</label>
+                            <input type="text" class="form-control" id="message_text" />
+                        </div>
+                        <button class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<script src="https://unpkg.com/vue@2.4.2"></script>-->
+    <script>
+        const wsUri = "ws://localhost:5001"
+
+        const socket = new WebSocket(wsUri)
+        socket.onopen = event => {
+            console.log("Socket connected successfully...")
+        }
+
+        let messages = document.getElementById("messages")
+
+        socket.onmessage = event => {
+            console.log(event)
+            messages.innerHTML += `${event.data}<br />`
+        }
+
+        document.querySelector(".btn").onclick = event => {
+            const text = document.getElementById("message_text").value
+            socket.send(text)
+        }
+    </script>
+</body>
+</html>

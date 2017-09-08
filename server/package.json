@@ -1,0 +1,11 @@
+{
+  "name": "web_socket_server",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Gabriel Cueto <@Mushr00m_Dev>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "ws": "^3.1.0"
+  }
+}
