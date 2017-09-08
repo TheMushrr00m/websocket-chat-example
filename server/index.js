@@ -6,7 +6,25 @@ server.on("connection", ws => {
   ws.on("message", message => {
     console.log(`Received: ${message}`)
 
-    ws.send(`From server: ${message}`)
+    message = JSON.parse(message)
+
+    if(message.type === "name") {
+      // Store the username that send the email
+      ws.userName = message.data
+      return
+    }
+
+    // Send message to all clients
+    for(let client of server.clients) {
+      if(client !== ws)
+        client.send(JSON.stringify({
+          type: "message",
+          name: ws.userName,
+          data: message.data
+        }))
+    }
+    // To send a message to an specific client
+    //ws.send(`From server: ${message}`)
   })
 
   ws.on("close", () => {
