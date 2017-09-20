@@ -1,4 +1,4 @@
-# Chat application with VueJS and WebSockets
+# Chat application using WebSockets
 
 ![Preview](preview.png "La Espora del Hongo")
 

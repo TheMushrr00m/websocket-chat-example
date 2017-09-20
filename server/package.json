@@ -5,7 +5,11 @@
   "author": "Gabriel Cueto <@Mushr00m_Dev>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "./node_modules/nodemon/bin/nodemon.js index.js"
+  },
   "dependencies": {
+    "nodemon": "^1.12.0",
     "ws": "^3.1.0"
   }
 }

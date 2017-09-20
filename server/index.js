@@ -3,6 +3,7 @@ const port = 5001
 const server = new WS({ port })
 
 server.on("connection", ws => {
+  console.log("=> Server started...")
   ws.on("message", message => {
     console.log(`Received: ${message}`)
 
