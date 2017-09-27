@@ -1,10 +1,10 @@
 const wsUri = "ws://localhost:5001"
-const socket = new WebSocket(wsUri)
+let socket = new WebSocket(wsUri)
 const name = prompt("What is your name?")
 
 document.getElementById('username-label').innerText = `You are: ${name}`
 
-socket.onopen = () => {
+socket.onopen = event => {
   socket.send(JSON.stringify({
     type: "name",
     data: name
