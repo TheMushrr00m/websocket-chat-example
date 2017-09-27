@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="col-xs-offset-3 col-xs-6">
+        <div class="col-xs-12 col-md-offset-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Join the conversation!</div>
                 <div class="panel-body">
@@ -20,7 +20,7 @@
                         <label for="messages" class="form-control-label">Messages</label>
                         <div id="messages" class="form-control"></div>
                     </div>
-                    <div class="form-inline pull-right">
+                    <div class="form-inline">
                         <div class="form-group form-group-sm">
                             <label for="message_text" class="form-control-label">Write your message:</label>
                             <input type="text" class="form-control" id="message_text" />
@@ -29,38 +29,10 @@
                     </div>
                 </div>
             </div>
+            <p id="username-label"></p>
         </div>
     </div>
 
-    <script>
-        const wsUri = "ws://localhost:5001"
-
-        const name = prompt("What is your name?")
-        const socket = new WebSocket(wsUri)
-        socket.onopen = event => {
-            socket.send(JSON.stringify({
-                type: "name",
-                data: name
-            }))
-            console.log("Socket connected successfully...")
-        }
-
-        let messages = document.getElementById("messages")
-
-        socket.onmessage = event => {
-            console.log(event)
-            const data = JSON.parse(event.data)
-            messages.innerHTML += `<span class="text-success">${data.name}</\span>${data.data}<br /\>`
-        }
-
-        document.querySelector(".btn").onclick = event => {
-            const text = document.getElementById("message_text").value
-            socket.send(JSON.stringify({
-                type: "message",
-                data: text
-            }))
-            messages.innerHTML += `<span class="text-warning">You:</\span> ${text}<br /\>`
-        }
-    </script>
+    <script src="src/app.js"></script>
 </body>
 </html>
